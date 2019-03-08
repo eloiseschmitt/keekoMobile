@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-native'
 
-class Results extends React.Component {
+export default class Results extends React.Component {
 
   _toRecommandationsPage() {
     this.props.navigation.navigate('Reco')
@@ -15,7 +15,7 @@ class Results extends React.Component {
         <View style={ styles.imageContainer }>
           <Image
             source={ require('../visuels/bar.png') }
-            style={ styles.bar }
+            style={ styles.image }
           />
           <Text>80% Bravo!</Text>
         </View>
@@ -23,7 +23,7 @@ class Results extends React.Component {
           <TouchableOpacity onPress={() => this._toRecommandationsPage()} style={styles.button}>
             <Text style={ styles.textButton }>accéder aux recommandations</Text>
           </TouchableOpacity>
-          </View>
+        </View>
       </View>
     )
   }
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50
   },
-  bar: {
+  image: {
     width: 350,
     height: 100
   },
@@ -75,5 +75,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
-
-export default Results

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
 import RecoItem from '../Components/recoItem'
 
-class Reco extends React.Component {
+export default class Reco extends React.Component {
 
   constructor(props) {
     super(props)
@@ -34,11 +34,13 @@ class Reco extends React.Component {
     return (
       <View style={ styles.mainContainer }>
         <Text style={ styles.titre }>recommandations</Text>
-        <FlatList
-        data={this.recommandations}
-        keyExtractor = {(item) => item.id.toString()}
-        renderItem={({item}) => <RecoItem reco={item} />}
-        />
+        <View>
+          <FlatList
+          data={this.recommandations}
+          keyExtractor = {(item) => item.id.toString()}
+          renderItem={({item}) => <RecoItem reco={item} />}
+          />
+        </View>
       </View>
     )
   }
@@ -47,17 +49,15 @@ class Reco extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    marginTop: 120
+    paddingTop: 120,
+    backgroundColor: '#4fc1df'
   },
   titre: {
-    flex: 1,
     textTransform: 'uppercase',
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
     textAlignVertical: 'center',
-    color: '#4fc1df'
+    color: '#fff'
   },
 })
-
-export default Reco
