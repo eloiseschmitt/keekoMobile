@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 export default class Home extends React.Component {
 
   _toResultatsPage() {
-    this.props.navigation.navigate('Results')
+    this.props.navigation.navigate('Swipe')
   }
 
   render() {
