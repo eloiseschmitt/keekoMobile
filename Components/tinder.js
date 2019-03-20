@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Swiper from '../react-native-deck-swiper'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { getRecommandation } from '../Ressources/Recommandation'
+//import { getRecommandation } from '../Ressources/Recommandation'
+import Recommandation from '../Ressources'
 
 // demo purposes only
 function * range (start, end) {
@@ -53,7 +54,7 @@ export default class Swipe extends Component {
 
   onSwipedAllCards = () => {
     var answersString = this.state.answers.join()
-    var toto = getRecommandation(1,1,1,1,1,1,1,1,1,1)
+    /* var toto = getRecommandation(1,1,1,1,1,1,1,1,1,1)
     console.log(toto[0].titre)
     this.setState({
       swipedAllCards: true,
