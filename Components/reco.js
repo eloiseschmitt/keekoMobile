@@ -4,39 +4,13 @@ import RecoItem from '../Components/recoItem'
 
 export default class Reco extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.recommandations = [
-      {
-        id: 1,
-        titre: "recommandation 1",
-        detail: "commencez par réaliser ... Pour se faire, vous aurez besoin de ..."
-      },
-      {
-        id: 2,
-        titre: "recommandation 2",
-        detail: "commencez par réaliser ... Pour se faire, vous aurez besoin de ..."
-      },
-      {
-        id: 3,
-        titre: "recommandation 3",
-        detail: "commencez par réaliser ... Pour se faire, vous aurez besoin de ..."
-      },
-      {
-        id: 4,
-        titre: "recommandation 4",
-        detail: "commencez par réaliser ... Pour se faire, vous aurez besoin de ..."
-      },
-    ]
-  }
-
   render() {
     return (
       <View style={ styles.mainContainer }>
         <Text style={ styles.titre }>recommandations</Text>
         <View>
           <FlatList
-          data={this.recommandations}
+          data={this.props.navigation.state.params.recommandations}
           keyExtractor = {(item) => item.id.toString()}
           renderItem={({item}) => <RecoItem reco={item} />}
           />

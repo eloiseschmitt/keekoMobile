@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Swiper from '../react-native-deck-swiper'
 import { Button, StyleSheet, Text, View } from 'react-native'
-//import { getRecommandation } from '../Ressources/Recommandation'
-import Recommandation from '../Ressources'
+import { getRecommandation } from '../Ressources/Recommandation'
+//import Recommandation from '../Ressources'
 
 // demo purposes only
 function * range (start, end) {
@@ -29,9 +29,7 @@ export default class Swipe extends Component {
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
-      answers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      answersString: '',
-      recommandationsKparK: []
+      answers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   }
 
@@ -53,18 +51,11 @@ export default class Swipe extends Component {
   }
 
   onSwipedAllCards = () => {
-    var answersString = this.state.answers.join()
-    /* var toto = getRecommandation(1,1,1,1,1,1,1,1,1,1)
-    console.log(toto[0].titre)
+    var listeDesRecommandations = getRecommandation(this.state.answers[0],this.state.answers[1],this.state.answers[2],this.state.answers[3],this.state.answers[4],this.state.answers[5],this.state.answers[6],this.state.answers[7],this.state.answers[8],this.state.answers[9])
     this.setState({
-      swipedAllCards: true,
-      answersString: answersString,
-      recommandationsKparK: toto
+      swipedAllCards: true
     })
-  /*  recommandationsKparK.forEach(function(element) {
-      console.log(element.titre)
-    })*/
-    this.props.navigation.navigate('Results')
+    this.props.navigation.navigate('Results', {recommandations: listeDesRecommandations})
   };
 
   swipeLeft = () => {

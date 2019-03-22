@@ -24,4 +24,9 @@ export default Recommandations = [
       titre: "recommandation 5",
       detail: "Étudiez les comportements de vos concurrents. "
     },
+    {
+      id: 6,
+      titre: "recommandation 6",
+      detail: "Vous avez effectué les étapes les + importantes, contactez-nous pour des conseils personnalisés"
+    }
 ]

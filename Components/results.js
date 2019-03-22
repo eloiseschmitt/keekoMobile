@@ -4,11 +4,12 @@ import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-n
 export default class Results extends React.Component {
 
   _toRecommandationsPage() {
-    this.props.navigation.navigate('Reco')
+    var toto = this.props.navigation.state.params.recommandations
+    this.props.navigation.navigate('Reco', {recommandations: toto})
   }
 
   render() {
-
+    //console.log(this.props.navigation.state.params.recommandations)
     return (
       <View style={ styles.mainContainer }>
         <Text style={ styles.titre }>votre résultat</Text>
