@@ -5,11 +5,11 @@ import { getRecommandation } from '../Ressources/Recommandation'
 //import Recommandation from '../Ressources'
 
 // demo purposes only
-function * range (start, end) {
+/*function * range (start, end) {
   for (let i = start; i <= end; i++) {
     yield i
   }
-}
+}*/
 
 export default class Swipe extends Component {
   constructor (props) {
@@ -24,7 +24,7 @@ export default class Swipe extends Component {
               'Avez-vous un blog pour votre entreprise ?',
               'Le web vous a-t-il déjà apporté des clients ?',
               'Votre secteur d\'activité est-il très compétitif ?',
-              'Vos concurrents sont-ils très présents sur le web'
+              'Vos concurrents sont-ils très présents sur le web ?'
             ],
       swipedAllCards: false,
       swipeDirection: '',

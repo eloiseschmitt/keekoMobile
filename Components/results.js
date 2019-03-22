@@ -4,12 +4,24 @@ import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-n
 export default class Results extends React.Component {
 
   _toRecommandationsPage() {
-    var toto = this.props.navigation.state.params.recommandations
-    this.props.navigation.navigate('Reco', {recommandations: toto})
+    this.props.navigation.navigate('Reco', {recommandations: this.props.navigation.state.params.recommandations})
   }
 
   render() {
-    //console.log(this.props.navigation.state.params.recommandations)
+    /**
+      Compter le nombre de recommandations et en fonction établir un %
+    */
+    const nbDeReco = this.props.navigation.state.params.recommandations.length
+    const pour = 'pas de résultat'
+    if(nbDeReco == 1) {
+      pourc = '80% Bravo!';
+    } else if (nbDeReco > 1 && nbDeReco<= 3) {
+      pourc = '60%, Encore quelques efforts'
+    } else if (nbDeReco > 3 && nbDeReco<= 6) {
+      pourc = '40%, Voyons ensemble comment progresser'
+    } else if (nbDeReco > 6 && nbDeReco<= 10) {
+      pourc = '20%, Votre marge de progression est élevée'
+    }
     return (
       <View style={ styles.mainContainer }>
         <Text style={ styles.titre }>votre résultat</Text>
@@ -18,7 +30,7 @@ export default class Results extends React.Component {
             source={ require('../visuels/bar.png') }
             style={ styles.image }
           />
-          <Text>80% Bravo!</Text>
+          <Text>{pourc}</Text>
         </View>
         <View style={ styles.footer }>
           <TouchableOpacity onPress={() => this._toRecommandationsPage()} style={styles.button}>
