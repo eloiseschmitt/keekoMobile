@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-n
 
 export default class Results extends React.Component {
 
+
   _toRecommandationsPage() {
     this.props.navigation.navigate('Reco', {recommandations: this.props.navigation.state.params.recommandations})
   }
@@ -12,29 +13,34 @@ export default class Results extends React.Component {
       Compter le nombre de recommandations et en fonction établir un %
     */
     const nbDeReco = this.props.navigation.state.params.recommandations.length
-    const pour = 'pas de résultat'
+    var pourc = 'pas de résultat'
+    var circles = require('../visuels/bar.png')
     if(nbDeReco == 1) {
-      pourc = '80% Bravo!';
+      pourc = '80% Bravo!'
+      circles = require('../visuels/circle80.png')
     } else if (nbDeReco > 1 && nbDeReco<= 3) {
       pourc = '60%, Encore quelques efforts'
+      circles = require('../visuels/circle60.png')
     } else if (nbDeReco > 3 && nbDeReco<= 6) {
       pourc = '40%, Voyons ensemble comment progresser'
+      circles = require('../visuels/circle40.png')
     } else if (nbDeReco > 6 && nbDeReco<= 10) {
       pourc = '20%, Votre marge de progression est élevée'
+      circles = require('../visuels/circle20.png')
     }
     return (
       <View style={ styles.mainContainer }>
-        <Text style={ styles.titre }>votre résultat</Text>
+        <Text style={ styles.titre }>Vos résultats</Text>
         <View style={ styles.imageContainer }>
+        <Text style={ styles.results }>{pourc}</Text>
           <Image
-            source={ require('../visuels/bar.png') }
+            source={ circles }
             style={ styles.image }
           />
-          <Text>{pourc}</Text>
         </View>
         <View style={ styles.footer }>
           <TouchableOpacity onPress={() => this._toRecommandationsPage()} style={styles.button}>
-            <Text style={ styles.textButton }>accéder aux recommandations</Text>
+            <Text style={ styles.textButton }>Accéder aux recommandations</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -45,24 +51,27 @@ export default class Results extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingTop: 120,
-    backgroundColor: '#4fc1df'
+    paddingTop: 100,
+    backgroundColor: '#fff'
   },
   titre: {
-    textTransform: 'uppercase',
     textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 20,
     textAlignVertical: 'center',
-    color: '#fff'
+    color: '#545454'
+  },
+  results: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: '#4fc1df'
   },
   imageContainer: {
     alignItems: 'center',
     marginTop: 50
   },
   image: {
-    width: 350,
-    height: 100
+    width: 200,
+    height: 200
   },
   footer:{
     width: '100%',
@@ -83,8 +92,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: 'white',
-    textTransform: 'uppercase',
-    fontSize: 20,
+    fontSize: 23,
     textAlign: 'center'
   }
 })

@@ -1,34 +1,29 @@
-import React, { Component } from 'react'
 import Recommandations from './TotalRecommandations'
-import { Text, FlatList,  } from 'react-native'
+import { getRecommandationsWithIds } from '../Connexion-api/keekooMobileApi'
 // Fonction permettant de retourner les recommandations en f° des réponses données:
 
 export function getRecommandation (reponse1, reponse2, reponse3, reponse4, reponse5, reponse6, reponse7, reponse8, reponse9, reponse10) {
-  var totalRecommandations = Recommandations
-  var listeDesRecommandations = []
+  var idList = []
 
   if(reponse1 == 0) {
-    listeDesRecommandations.push(totalRecommandations[0])
+    idList.push(1)
   }
   if(reponse2 == 0) {
-    listeDesRecommandations.push(totalRecommandations[1])
+    idList.push(2)
   }
   if(reponse3 == 0) {
-    listeDesRecommandations.push(totalRecommandations[2])
+    idList.push(3)
   }
   if(reponse4 == 0) {
-    listeDesRecommandations.push(totalRecommandations[3])
+    idList.push(4)
   }
   if(reponse5 == 0) {
-    listeDesRecommandations.push(totalRecommandations[4])
+    idList.push(5)
   }
   if(reponse1 == 1 && reponse2 == 1 && reponse3 == 1 && reponse4 == 1 && reponse5 == 1) {
-    listeDesRecommandations.push(totalRecommandations[5])
+    idList.push(6)
   }
 
-  return listeDesRecommandations;
+  return idList;
+
 }
-
-/*export default const Recommandation = ({Recommandations}) => (
-
-)*/

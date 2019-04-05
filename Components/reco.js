@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   titre: {
     textTransform: 'uppercase',
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlignVertical: 'center',
     color: '#fff'

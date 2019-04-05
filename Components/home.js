@@ -12,16 +12,16 @@ export default class Home extends React.Component {
       <View style={ styles.mainContainer }>
         <View style={ styles.imageContainer }>
           <Image
-            source={ require('../visuels/keekoo.png') }
+            source={ require('../visuels/Recherches-logos-KEEKOO_4.png') }
             style={ styles.image }
           />
         </View>
         <View style={ styles.resumeContainer }>
-          <Text style={ styles.resumeText }>Qui cum venisset ob haec festinatis itineribus Antiochiam, praestrictis palatii ianuis, contempto Caesare, quem videri decuerat, ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec regiam introiit nec processit in publicum</Text>
+          <Text style={ styles.resumeText }>Répondez à 10 questions par oui ou par non pour obtenir votre note de présence sur Internet. Vous pouvez faire glisser les questions à gauche ou à droite pour répondre.</Text>
         </View>
         <View style={ styles.footer }>
           <TouchableOpacity onPress={() => this._toResultatsPage()} style={styles.button}>
-            <Text style={ styles.textButton }>accéder au questionnaire</Text>
+            <Text style={ styles.textButton }>Accéder au questionnaire</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -35,14 +35,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#4fc1df'
   },
   resumeContainer: {
-    marginTop: 50,
+    marginTop: 10,
     width: '100%',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   resumeText: {
     width: 300,
     textAlign: 'center',
-    margin: 20
+    margin: 10,
+    fontSize: 18
   },
   footer:{
     width: '100%',
@@ -50,26 +51,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 200
+    bottom: 270
   },
   button: {
-    width: 300,
-    height: 90,
-    backgroundColor: '#235663',
+    width: 310,
+    height: 60,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
-    borderRadius: 10
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: '#f1f1f1',
   },
   textButton: {
-    color: 'white',
-    textTransform: 'uppercase',
-    fontSize: 20,
-    textAlign: 'center'
+    color: '#f1f1f1',
+    fontSize: 23,
+    textAlign: 'center',
+    letterSpacing: 1
   },
   imageContainer: {
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 80
   },
   image: {
     width: 350,
