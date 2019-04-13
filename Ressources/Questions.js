@@ -1,7 +1,7 @@
 import { getQuestionsWithId } from '../Connexion-api/keekooMobileApi'
 // Fonction permettant de retourner un id de question en f° des réponses données:
 export function getQuestion (indexActualQuestion, reponse) {
-  let idNextQuestion = parseInt(indexActualQuestion)+1
+  let idNextQuestion = ""
   let descrNextQuestion = ""
 
   switch(indexActualQuestion) {
@@ -14,7 +14,7 @@ export function getQuestion (indexActualQuestion, reponse) {
       }
       break;
 
-    default: idNextQuestion = idNextQuestion
+    default: idNextQuestion = 1
   }
 
   //return descrNextQuestion;

@@ -10,17 +10,7 @@ export default class Swipe extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: ['Vos clients sont des professionnels ?',
-              'Vos clients sont des particuliers ?',
-              'Etes vous présents sur facebook ou Instagram ?',
-              'Êtes vous présents sur linkedin ?',
-              'Avez-vous un site internet ?',
-              'Avez-vous une fiche Google My Business ?',
-              'Avez-vous un blog pour votre entreprise ?',
-              'Le web vous a-t-il déjà apporté des clients ?',
-              'Votre secteur d\'activité est-il très compétitif ?',
-              'Vos concurrents sont-ils très présents sur le web ?'
-            ],
+      cards: ['Vos clients sont des professionnels ?','','','','','','','','',''],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
@@ -37,8 +27,9 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
+    //console.log(`index = ${index}`)
     let nextQuestionDetails = getQuestion(index, type)
-    console.log(nextQuestionDetails)
+    //console.log(nextQuestionDetails)
     let idQuestion = parseInt(index)+1
     this.state.answers[index] = type
 
@@ -46,10 +37,14 @@ export default class Swipe extends Component {
         this.state.cards[idQuestion] = data.results.question[0].detail
         this.forceUpdate()
     });
-    
-    this.setState({
-      cardIndex: this.state.cardIndex+1
-    })
+
+    if(this.state.cardIndex == 9) {
+      this.onSwipedAllCards()
+    } else {
+      this.setState({
+        cardIndex: this.state.cardIndex+1
+      })
+    }
 
     //console.log(`question n° ${index}`, `réponse n° ${type}`)
   }

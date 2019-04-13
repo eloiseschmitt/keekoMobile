@@ -51,7 +51,7 @@ export default class Results extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingTop: 100,
+    paddingTop: 50,
     backgroundColor: '#fff'
   },
   titre: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 200
+    bottom: 100
   },
   button: {
     width: 300,

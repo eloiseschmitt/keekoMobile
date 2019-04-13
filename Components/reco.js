@@ -7,7 +7,6 @@ export default class Reco extends React.Component {
   render() {
     return (
       <View style={ styles.mainContainer }>
-        <Text style={ styles.titre }>recommandations</Text>
         <View>
           <FlatList
           data={this.props.navigation.state.params.recommandations}
@@ -23,15 +22,7 @@ export default class Reco extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingTop: 120,
+    paddingTop: 50,
     backgroundColor: '#4fc1df'
-  },
-  titre: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlignVertical: 'center',
-    color: '#fff'
-  },
+  }
 })
