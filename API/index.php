@@ -17,4 +17,4 @@ $resulats = $requete->fetchAll();
 
 $results["reco"] = $resulats;
 
-retour_json(true, "Ci-dessous la liste des recommandations :", $results);
+echo retour_json(true, "Ci-dessous la liste des recommandations :", $results);

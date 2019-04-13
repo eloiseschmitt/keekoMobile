@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Swiper from '../react-native-deck-swiper'
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { getRecommandation } from '../Ressources/Recommandation'
+import { getQuestion } from '../Ressources/Questions'
 import { getRecommandationsWithIds } from '../Connexion-api/keekooMobileApi'
+import { getQuestionsWithId } from '../Connexion-api/keekooMobileApi'
 
 export default class Swipe extends Component {
   constructor (props) {
@@ -35,21 +37,29 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
+    let nextQuestionDetails = getQuestion(index, type)
+    console.log(nextQuestionDetails)
+    let idQuestion = parseInt(index)+1
     this.state.answers[index] = type
-    this.forceUpdate()
+
+    getQuestionsWithId(nextQuestionDetails).then(data => {
+        this.state.cards[idQuestion] = data.results.question[0].detail
+        this.forceUpdate()
+    });
+    
     this.setState({
       cardIndex: this.state.cardIndex+1
     })
-  //  console.log(`question n° ${index}`, `réponse n° ${type}`)
+
+    //console.log(`question n° ${index}`, `réponse n° ${type}`)
   }
 
   onSwipedAllCards = () => {
-    var arrayListeDesRecommandations = getRecommandation(this.state.answers[0],this.state.answers[1],this.state.answers[2],this.state.answers[3],this.state.answers[4],this.state.answers[5],this.state.answers[6],this.state.answers[7],this.state.answers[8],this.state.answers[9])
-    var strListeDesRecommandations = arrayListeDesRecommandations.toString();
+    let arrayListeDesRecommandations = getRecommandation(this.state.answers[0],this.state.answers[1],this.state.answers[2],this.state.answers[3],this.state.answers[4],this.state.answers[5],this.state.answers[6],this.state.answers[7],this.state.answers[8],this.state.answers[9])
+    let strListeDesRecommandations = arrayListeDesRecommandations.toString();
     this.setState({
       swipedAllCards: true
     })
-    //getRecommandationsWithIds(strListeDesRecommandations).then(data => console.log(data))
     getRecommandationsWithIds(strListeDesRecommandations).then(data => {
       this.props.navigation.navigate('Results', {recommandations: data.results.reco})
 
@@ -197,7 +207,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#f1f1f1',
     padding: 20,
-    height: 600
+    height: 600,
+    color: '#46403d'
   },
   text: {
     textAlign: 'center',
@@ -221,7 +232,7 @@ const styles = StyleSheet.create({
   textButtonOui: {
     width: 150,
     height: 60,
-    backgroundColor: 'blue',
+    backgroundColor: '#46403d',
     justifyContent: 'center',
     margin: 20,
     borderRadius: 7,

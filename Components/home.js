@@ -1,10 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from 'react-native'
 
 export default class Home extends React.Component {
 
   _toResultatsPage() {
     this.props.navigation.navigate('Swipe')
+  }
+
+  _toMentionsPage() {
+    this.props.navigation.navigate('Mentions')
   }
 
   render() {
@@ -23,6 +27,14 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={() => this._toResultatsPage()} style={styles.button}>
             <Text style={ styles.textButton }>Accéder au questionnaire</Text>
           </TouchableOpacity>
+        </View>
+        <View style={ styles.footerMentions }>
+        <Button
+          onPress={() => this._toMentionsPage()}
+          title="Mentions légales"
+          color="#46403d"
+          accessibilityLabel="Accéder aux mentions légales"
+          />
         </View>
       </View>
     )
@@ -52,6 +64,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 270
+  },
+  footerMentions: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 100
   },
   button: {
     width: 310,

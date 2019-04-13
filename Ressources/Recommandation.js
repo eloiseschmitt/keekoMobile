@@ -1,7 +1,4 @@
-import Recommandations from './TotalRecommandations'
-import { getRecommandationsWithIds } from '../Connexion-api/keekooMobileApi'
-// Fonction permettant de retourner les recommandations en f° des réponses données:
-
+// Fonction permettant de retourner les id recommandations en f° des réponses données:
 export function getRecommandation (reponse1, reponse2, reponse3, reponse4, reponse5, reponse6, reponse7, reponse8, reponse9, reponse10) {
   var idList = []
 
