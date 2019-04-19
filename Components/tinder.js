@@ -10,7 +10,7 @@ export default class Swipe extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: ['Vos clients sont des professionnels ?','','','','','','','','',''],
+      cards: ['Vos clients sont-ils des professionnels ?'],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
@@ -27,11 +27,13 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
+    //console.log(this.state.cardIndex)
     //console.log(`index = ${index}`)
     let nextQuestionDetails = getQuestion(index, type)
     //console.log(nextQuestionDetails)
     let idQuestion = parseInt(index)+1
     this.state.answers[index] = type
+    this.forceUpdate()
 
     getQuestionsWithId(nextQuestionDetails).then(data => {
         this.state.cards[idQuestion] = data.results.question[0].detail
@@ -39,13 +41,13 @@ export default class Swipe extends Component {
     });
 
     if(this.state.cardIndex == 9) {
+      console.log("well done")
       this.onSwipedAllCards()
     } else {
       this.setState({
         cardIndex: this.state.cardIndex+1
       })
     }
-
     //console.log(`question n° ${index}`, `réponse n° ${type}`)
   }
 

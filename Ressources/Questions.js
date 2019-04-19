@@ -7,16 +7,15 @@ export function getQuestion (indexActualQuestion, reponse) {
   switch(indexActualQuestion) {
     case 0:
       if(reponse == 0) {
-        idNextQuestion = 1;
+        idNextQuestion = 2;
       }
       else {
-        idNextQuestion = 6;
+        idNextQuestion = 4;
       }
       break;
 
     default: idNextQuestion = 1
   }
-
   //return descrNextQuestion;
   return idNextQuestion;
 }
