@@ -5,16 +5,18 @@ import { getRecommandation } from '../Ressources/Recommandation'
 import { getQuestion } from '../Ressources/Questions'
 import { getRecommandationsWithIds } from '../Connexion-api/keekooMobileApi'
 import { getQuestionsWithId } from '../Connexion-api/keekooMobileApi'
+import { setAnswer } from '../Connexion-api/keekooMobileApi'
 
 export default class Swipe extends Component {
   constructor (props) {
     super(props)
     this.state = {
       cards: ['Vos clients sont-ils des professionnels ?'],
+      idCards: [1],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
-      answers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      answers: []
     }
   }
 
@@ -27,31 +29,71 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
-    //console.log(this.state.cardIndex)
-    //console.log(`index = ${index}`)
     let nextQuestionDetails = getQuestion(index, type)
-    //console.log(nextQuestionDetails)
-    let idQuestion = parseInt(index)+1
-    this.state.answers[index] = type
-    this.forceUpdate()
-
-    getQuestionsWithId(nextQuestionDetails).then(data => {
-        this.state.cards[idQuestion] = data.results.question[0].detail
-        this.forceUpdate()
-    });
-
-    if(this.state.cardIndex == 9) {
-      console.log("well done")
-      this.onSwipedAllCards()
-    } else {
+    let toto = setAnswer(index, type)
+    this.setState(state => {
+        const answers = state.answers.push(type)
+    })
+    if(nextQuestionDetails == 15) {
+      //console.log(`1er console.log= ${this.state.answers}`)
+      let arrayListeDesRecommandations = getRecommandation(this.state.idCards, this.state.answers)
+      let strListeDesRecommandations = arrayListeDesRecommandations.toString();
       this.setState({
-        cardIndex: this.state.cardIndex+1
+        swipedAllCards: true
+      })
+      //console.log(strListeDesRecommandations)
+      getRecommandationsWithIds(strListeDesRecommandations).then(data => {
+        //console.log(data.results.reco)
+       this.props.navigation.navigate('Results', {recommandations: data.results.reco, questionsId: this.state.idCards, answersId: this.state.answers})
       })
     }
+    else {
+
+      //let idQuestion = parseInt(nextQuestionDetails)-1
+    /*this.state.answers[index] = type
+      this.forceUpdate()*/
+
+
+
+      //console.log(`2ème console.log= ${this.state.answers}`)
+
+      getQuestionsWithId(nextQuestionDetails).then(data => {
+      //  console.log(`data result detail = ${data.results.question[0].detail}`)
+          //this.state.cards[idQuestion] = data.results.question[0].detail
+          //this.forceUpdate()
+
+          this.setState(state => {
+            const cards = state.cards.push(data.results.question[0].detail)
+            const idCards = state.idCards.push(nextQuestionDetails)
+            //const cards = [...state.cards, data.results.question[0].detail]
+          })
+              this.state.cardIndex = nextQuestionDetails
+              this.forceUpdate()
+
+          //  console.log(`first cardIndex=${this.state.cardIndex} alors que nexquestiondetail = ${nextQuestionDetails}`)
+          //  console.log(`this.state.cards= ${this.state.cards}`)
+          })
+      }
+
+    /*if(nextQuestionDetails == 12 || nextQuestionDetails == 14) {
+      console.log(this.state.answers)
+      //this.onSwipedAllCards()
+    } else {
+      /*this.setState({
+        cardIndex: nextQuestionDetails
+        })*/
+
+        /*this.state.cardIndex = nextQuestionDetails
+        this.forceUpdate()
+
+      console.log(`first cardIndex=${this.state.cardIndex} alors que nexquestiondetail = ${nextQuestionDetails}`)
+      console.log(`this.state.cards[nextQuestionDetails]= ${this.state.cards}`)
+    }*/
+    //console.log(`id_question= ${this.state.cardIndex}`)
     //console.log(`question n° ${index}`, `réponse n° ${type}`)
   }
 
-  onSwipedAllCards = () => {
+  /*onSwipedAllCards = () => {
     let arrayListeDesRecommandations = getRecommandation(this.state.answers[0],this.state.answers[1],this.state.answers[2],this.state.answers[3],this.state.answers[4],this.state.answers[5],this.state.answers[6],this.state.answers[7],this.state.answers[8],this.state.answers[9])
     let strListeDesRecommandations = arrayListeDesRecommandations.toString();
     this.setState({
@@ -63,7 +105,7 @@ export default class Swipe extends Component {
     })
 
     //this.props.navigation.navigate('Results', {recommandations: listeDesRecommandations})
-  };
+  };*/
 
   swipeLeft = () => {
     this.swiper.swipeLeft()
@@ -80,11 +122,11 @@ export default class Swipe extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={() => this.onSwiped('general')}
-          onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
-          onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
-          onSwipedTop={() => this.onSwiped(1, this.state.cardIndex)}
-          onSwipedBottom={() => this.onSwiped(0, this.state.cardIndex)}
+          //onSwiped={() => this.onSwiped('general')}
+          //onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
+          //onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
+          //onSwipedTop={() => this.onSwiped(1, this.state.cardIndex)}
+          //onSwipedBottom={() => this.onSwiped(0, this.state.cardIndex)}
           onTapCard={this.swipeLeft}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}

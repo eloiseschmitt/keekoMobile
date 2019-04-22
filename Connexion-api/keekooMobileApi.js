@@ -8,7 +8,7 @@ export function getRecommandationsWithIds(idList) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      idRecommandations: idList
+      id: idList
     }),
   })
     .then((response) => response.json())
@@ -30,4 +30,21 @@ export function getQuestionsWithId(idQuestions) {
   })
     .then((response) => response.json())
     .catch((error) => console.error(error))
+}
+
+export function setAnswer(idQuestion, answer) {
+  //console.log(`idQuestion= ${idQuestion} et answer= ${answer}`)
+  const url = 'https://keekoo-mobile.xdev.ovh/API/writeAnswer.php';
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      question_id: idQuestion,
+      reponse: answer
+    }),
+  })
 }

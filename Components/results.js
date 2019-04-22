@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-native'
+import { haveStats } from '../Ressources/Stats'
+
 
 export default class Results extends React.Component {
 
@@ -9,12 +11,15 @@ export default class Results extends React.Component {
   }
 
   render() {
+    //console.log(this.props.navigation.state.params.questionsId)
+    let listDesStats = haveStats(this.props.navigation.state.params.questionsId, this.props.navigation.state.params.answers)
     /**
       Compter le nombre de recommandations et en fonction établir un %
+      A REMPLACER PAR FAIRE DES STATS EN F° DES REPONSES DÉJÀ REMPLIES
     */
     const nbDeReco = this.props.navigation.state.params.recommandations.length
-    var pourc = 'pas de résultat'
-    var circles = require('../visuels/bar.png')
+    let pourc = 'pas de résultat'
+    let circles = require('../visuels/bar.png')
     if(nbDeReco == 1) {
       pourc = '80% Bravo!'
       circles = require('../visuels/circle80.png')
