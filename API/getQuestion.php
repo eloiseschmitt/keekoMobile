@@ -15,4 +15,4 @@ if(!empty($id)) {
 $resultats = $requete->fetchAll();
 $results["question"] = $resultats;
 
-echo retour_json(true, "test", $results);
+echo retour_json(true, "Question by id", $results);

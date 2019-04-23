@@ -48,3 +48,17 @@ export function setAnswer(idQuestion, answer) {
     }),
   })
 }
+
+export function getAnswers() {
+  const url = 'https://keekoo-mobile.xdev.ovh/API/getAnswers.php';
+
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}

@@ -6,6 +6,7 @@ import { getQuestion } from '../Ressources/Questions'
 import { getRecommandationsWithIds } from '../Connexion-api/keekooMobileApi'
 import { getQuestionsWithId } from '../Connexion-api/keekooMobileApi'
 import { setAnswer } from '../Connexion-api/keekooMobileApi'
+import { getAnswers } from '../Connexion-api/keekooMobileApi'
 
 export default class Swipe extends Component {
   constructor (props) {
@@ -16,7 +17,8 @@ export default class Swipe extends Component {
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
-      answers: []
+      answers: [],
+      listAnswers: []
     }
   }
 
@@ -41,11 +43,14 @@ export default class Swipe extends Component {
       this.setState({
         swipedAllCards: true
       })
-      //console.log(strListeDesRecommandations)
-      getRecommandationsWithIds(strListeDesRecommandations).then(data => {
-        //console.log(data.results.reco)
-       this.props.navigation.navigate('Results', {recommandations: data.results.reco, questionsId: this.state.idCards, answersId: this.state.answers})
+      getAnswers().then(data1 => {
+        getRecommandationsWithIds(strListeDesRecommandations).then(data2 => {
+          //console.log(data.results.reco)
+         this.props.navigation.navigate('Results', {recommandations: data2.results.reco, questionsId: this.state.idCards, answersId: this.state.answers, listAnswers: data1.results})
+        })
       })
+      //console.log(strListeDesRecommandations)
+
     }
     else {
 

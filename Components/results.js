@@ -5,14 +5,12 @@ import { haveStats } from '../Ressources/Stats'
 
 export default class Results extends React.Component {
 
-
   _toRecommandationsPage() {
     this.props.navigation.navigate('Reco', {recommandations: this.props.navigation.state.params.recommandations})
   }
 
   render() {
-    //console.log(this.props.navigation.state.params.questionsId)
-    let listDesStats = haveStats(this.props.navigation.state.params.questionsId, this.props.navigation.state.params.answers)
+    let listDesStats = haveStats(this.props.navigation.state.params.questionsId, this.props.navigation.state.params.answersId, this.props.navigation.state.params.listAnswers)
     /**
       Compter le nombre de recommandations et en fonction établir un %
       A REMPLACER PAR FAIRE DES STATS EN F° DES REPONSES DÉJÀ REMPLIES
