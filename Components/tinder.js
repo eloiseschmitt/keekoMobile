@@ -31,6 +31,7 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
+    console.log("toto")
     let nextQuestionDetails = getQuestion(index, type)
     let toto = setAnswer(index, type)
     this.setState(state => {
@@ -127,9 +128,9 @@ export default class Swipe extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          //onSwiped={() => this.onSwiped('general')}
-          //onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
-          //onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
+          onSwiped={() => this.onSwiped('general')}
+          onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
+          onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedTop={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedBottom={() => this.onSwiped(0, this.state.cardIndex)}
           onTapCard={this.swipeLeft}
@@ -217,10 +218,10 @@ export default class Swipe extends Component {
           <Button onPress={() => this.swiper.swipeBack()} title='Question précédente' />
         </Swiper>
         <View style={ styles.buttonsFooter }>
-          <TouchableOpacity onPress={() => {this.swipeLeft(); this.onSwiped(0, this.state.cardIndex)}}>
+          <TouchableOpacity onPress={() => this.onSwiped(0, this.state.cardIndex)}>
             <Text style={ styles.textButtonNon }>NON</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {this.swipeRight(); this.onSwiped(1, this.state.cardIndex)}}>
+          <TouchableOpacity onPress={() => this.onSwiped(1, this.state.cardIndex)}>
             <Text style={ styles.textButtonOui }>OUI</Text>
           </TouchableOpacity>
         </View>
