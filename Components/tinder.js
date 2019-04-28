@@ -8,6 +8,8 @@ import { getQuestionsWithId } from '../Connexion-api/keekooMobileApi'
 import { setAnswer } from '../Connexion-api/keekooMobileApi'
 import { getAnswers } from '../Connexion-api/keekooMobileApi'
 
+// Revoir l'affichage des cartes = différent selon swipe ou click
+
 export default class Swipe extends Component {
   constructor (props) {
     super(props)
@@ -31,14 +33,13 @@ export default class Swipe extends Component {
   };
 
   onSwiped = (type, index) => { //type: 0 = non, 1 = oui
-    console.log("toto")
+    //console.log(`type= ${type} et index = ${index}`)
     let nextQuestionDetails = getQuestion(index, type)
     let toto = setAnswer(index, type)
     this.setState(state => {
         const answers = state.answers.push(type)
     })
     if(nextQuestionDetails == 15) {
-      //console.log(`1er console.log= ${this.state.answers}`)
       let arrayListeDesRecommandations = getRecommandation(this.state.idCards, this.state.answers)
       let strListeDesRecommandations = arrayListeDesRecommandations.toString();
       this.setState({
@@ -46,57 +47,23 @@ export default class Swipe extends Component {
       })
       getAnswers().then(data1 => {
         getRecommandationsWithIds(strListeDesRecommandations).then(data2 => {
-          //console.log(data.results.reco)
          this.props.navigation.navigate('Results', {recommandations: data2.results.reco, questionsId: this.state.idCards, answersId: this.state.answers, listAnswers: data1.results})
         })
       })
-      //console.log(strListeDesRecommandations)
 
     }
     else {
 
-      //let idQuestion = parseInt(nextQuestionDetails)-1
-    /*this.state.answers[index] = type
-      this.forceUpdate()*/
-
-
-
-      //console.log(`2ème console.log= ${this.state.answers}`)
-
       getQuestionsWithId(nextQuestionDetails).then(data => {
-      //  console.log(`data result detail = ${data.results.question[0].detail}`)
-          //this.state.cards[idQuestion] = data.results.question[0].detail
-          //this.forceUpdate()
 
           this.setState(state => {
             const cards = state.cards.push(data.results.question[0].detail)
             const idCards = state.idCards.push(nextQuestionDetails)
-            //const cards = [...state.cards, data.results.question[0].detail]
           })
               this.state.cardIndex = nextQuestionDetails
               this.forceUpdate()
-
-          //  console.log(`first cardIndex=${this.state.cardIndex} alors que nexquestiondetail = ${nextQuestionDetails}`)
-          //  console.log(`this.state.cards= ${this.state.cards}`)
-          })
+        })
       }
-
-    /*if(nextQuestionDetails == 12 || nextQuestionDetails == 14) {
-      console.log(this.state.answers)
-      //this.onSwipedAllCards()
-    } else {
-      /*this.setState({
-        cardIndex: nextQuestionDetails
-        })*/
-
-        /*this.state.cardIndex = nextQuestionDetails
-        this.forceUpdate()
-
-      console.log(`first cardIndex=${this.state.cardIndex} alors que nexquestiondetail = ${nextQuestionDetails}`)
-      console.log(`this.state.cards[nextQuestionDetails]= ${this.state.cards}`)
-    }*/
-    //console.log(`id_question= ${this.state.cardIndex}`)
-    //console.log(`question n° ${index}`, `réponse n° ${type}`)
   }
 
   /*onSwipedAllCards = () => {
@@ -128,9 +95,9 @@ export default class Swipe extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={() => this.onSwiped('general')}
-          onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
-          onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
+          //onSwiped={() => this.onSwiped('general')}
+          //onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
+          //onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedTop={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedBottom={() => this.onSwiped(0, this.state.cardIndex)}
           onTapCard={this.swipeLeft}
@@ -218,14 +185,15 @@ export default class Swipe extends Component {
           <Button onPress={() => this.swiper.swipeBack()} title='Question précédente' />
         </Swiper>
         <View style={ styles.buttonsFooter }>
-          <TouchableOpacity onPress={() => this.onSwiped(0, this.state.cardIndex)}>
+          <TouchableOpacity onPress={() => {this.swipeLeft(); this.onSwiped(0, this.state.cardIndex)}}>
             <Text style={ styles.textButtonNon }>NON</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.onSwiped(1, this.state.cardIndex)}>
+          <TouchableOpacity onPress={() => {this.swipeRight(); this.onSwiped(1, this.state.cardIndex)}}>
             <Text style={ styles.textButtonOui }>OUI</Text>
           </TouchableOpacity>
         </View>
       </View>
+
     )
   }
 }
