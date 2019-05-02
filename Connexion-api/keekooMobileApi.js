@@ -32,6 +32,23 @@ export function getQuestionsWithId(idQuestions) {
     .catch((error) => console.error(error))
 }
 
+export function getQuestionsWithIds(idsQuestions) {
+  const url = 'https://keekoo-mobile.xdev.ovh/API/getQuestions.php';
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: idsQuestions
+    }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
 export function setAnswer(idQuestion, answer) {
   //console.log(`idQuestion= ${idQuestion} et answer= ${answer}`)
   const url = 'https://keekoo-mobile.xdev.ovh/API/writeAnswer.php';
