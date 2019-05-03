@@ -20,10 +20,10 @@ export default class ResultsItems extends React.Component {
     let majorite
     let icone
     if(result.item.position == 0) {
-      majorite = "La majorité des freelances a répondu comme vous"
+      majorite = "A répondu comme vous"
       icone = require('../visuels/majority.png')
     } else {
-      majorite = "La majorité des freelances n'a pas répondu comme vous"
+      majorite = "N'a pas répondu comme vous"
       icone = require('../visuels/notmajority.png')
     }
     //console.log(result)
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   },
   detailMajorite: {
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    marginBottom: 10
   }
 })

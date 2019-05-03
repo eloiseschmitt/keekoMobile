@@ -21,7 +21,7 @@ export default class Home extends React.Component {
           />
         </View>
         <View style={ styles.resumeContainer }>
-          <Text style={ styles.resumeText }>Répondez à 10 questions par oui ou par non pour obtenir votre note de présence sur Internet. Vous pouvez faire glisser les questions à gauche ou à droite pour répondre.</Text>
+          <Text style={ styles.resumeText }>Répondez à quelques questions par oui ou par non pour obtenir votre note de présence sur Internet. Vous pouvez faire glisser les questions à gauche ou à droite pour répondre.</Text>
         </View>
         <View style={ styles.footer }>
           <TouchableOpacity onPress={() => this._toResultatsPage()} style={styles.button}>

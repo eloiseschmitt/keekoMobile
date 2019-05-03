@@ -95,9 +95,9 @@ export default class Swipe extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          //onSwiped={() => this.onSwiped('general')}
-          //onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
-          //onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
+          onSwiped={() => this.onSwiped('general')}
+          onSwipedLeft={() => this.onSwiped(0, this.state.cardIndex)}
+          onSwipedRight={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedTop={() => this.onSwiped(1, this.state.cardIndex)}
           //onSwipedBottom={() => this.onSwiped(0, this.state.cardIndex)}
           onTapCard={this.swipeLeft}
@@ -183,15 +183,15 @@ export default class Swipe extends Component {
           swipeBackCard
         >
           <Button onPress={() => this.swiper.swipeBack()} title='Question précédente' />
+          <View style={ styles.buttonsFooter }>
+            <TouchableOpacity onPress={() => {this.swipeLeft(); this.onSwiped(0, this.state.cardIndex)}}>
+              <Text style={ styles.textButtonNon }>NON</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.swipeRight(); this.onSwiped(1, this.state.cardIndex)}}>
+              <Text style={ styles.textButtonOui }>OUI</Text>
+            </TouchableOpacity>
+          </View>
         </Swiper>
-        <View style={ styles.buttonsFooter }>
-          <TouchableOpacity onPress={() => {this.swipeLeft(); this.onSwiped(0, this.state.cardIndex)}}>
-            <Text style={ styles.textButtonNon }>NON</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {this.swipeRight(); this.onSwiped(1, this.state.cardIndex)}}>
-            <Text style={ styles.textButtonOui }>OUI</Text>
-          </TouchableOpacity>
-        </View>
       </View>
 
     )

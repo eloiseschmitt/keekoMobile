@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
 import { haveStats } from '../Ressources/Stats'
 import ResultItem from '../Components/resultItem'
 
@@ -14,11 +14,11 @@ export default class Results extends React.Component {
     let listDesStats = haveStats(this.props.navigation.state.params.questionsId, this.props.navigation.state.params.answersId, this.props.navigation.state.params.listAnswers)
 
     return (
-      <View style={ styles.mainContainer }>
+      <ScrollView style={ styles.mainContainer }>
         <Text style={ styles.titre }>Vos résultats</Text>
         <View style={ styles.sousTitre }>
-          <Text>Questions auxquelles vous avez répondu</Text>
-          <Text>Votre position</Text>
+          <Text style={{width: '50%', textAlign: 'center'}}>Questions auxquelles vous avez répondu</Text>
+          <Text style={{width: '50%', textAlign: 'center'}}>La majorité des freelances :</Text>
         </View>
 
         <View>
@@ -33,7 +33,7 @@ export default class Results extends React.Component {
             <Text style={ styles.textButton }>Accéder aux recommandations</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   sousTitre: {
     flex: 1,
     flexDirection: 'row',
+    padding: 20
   },
   results: {
     fontSize: 50,
@@ -72,8 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: 100
+    paddingBottom: 100
   },
   button: {
     width: 300,

@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 
 export default class Mentions extends React.Component {
     render() {
       return(
-        <View>
-          <Text>Mentions légales</Text>
+        <View style={ styles.mainContainer }>
+          <Text style={ styles.titre }>Mentions légales</Text>
           <Text>
             Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
 
@@ -18,3 +18,18 @@ export default class Mentions extends React.Component {
       )
     }
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#4fc1df',
+    padding: 20
+  },
+  titre: {
+    textAlign: 'center',
+    fontSize: 20,
+    textAlignVertical: 'center',
+    color: '#545454',
+    marginBottom: 20
+  },
+})
